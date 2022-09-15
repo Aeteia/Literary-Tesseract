@@ -1,0 +1,237 @@
+
+ ~~~~~~~~~~DATA EXTRACTED FROM NEXT PAGE STARTS NOW.~~~~~~~~~~ 
+ 
+Lab Introduction 2
+QGIS : Jupyter Notebook : Lab Content
+
+Introduction
+
+This module will cover a series of different concepts relating to palaeoglacial geomorphology. In today’s
+session we will be looking at the layout and tools used in the second series of labs, from Lab 5 to Lab 8. This
+document will serve to introduce you to some of the tools we will use, offer some short exercises to carry
+out, and provide further reading and resources for each tool. Through the course of the second series of
+lab sessions, you will make use of QGIS, Python through Jupyter Notebook and R. The two focus points we
+will have in this session are Jupyter Notebook — in terms of setting up and making sure it works, and QGIS
+— to bring everyone to a reasonable level of knowledge with the software which we will develop further in
+the programme.
+
+Throughout the labs, it is likely you will encounter errors, problems or get stuck with the software we need
+to use. It’s recommended that before you come to teachers with a question, you attempt to troubleshoot
+it yourself first! For this, google and the documents below are your friend. Chances are if you have a
+problem, then someone else in the past has had the same problem, but possibly in a different concept.
+This is not foolproof, but it is often a good place to start! It also helps you think about how to phrase your
+question about how to find a solution to the issue!
+
+Reading & Resources
+e https://docs.qgis.org/3.22/en/docs/index.htm! QGIS Documentation - useful to find out how
+
+various tools work.
+
+e https://jupyter-notebook.readthedocs.io/en/stable/ Jupyter Notebook documentation - useful to
+
+understand the functionality of Jupyter Notebook.
+
+e https://gis.stackexchange.com/ GIS Stack Exchange - very useful when you are looking for the
+solution to specific
+
+e problems in GIS. It’s often a good idea to throw your question into google and find the answer
+first!
+
+e https://stackoverflow.com/questions/tagged/python Stack Overflow - an important resource for
+finding the answer to many programming questions.
+
+e hittps://www.google.com/ The classic, and most effective starting point for all troubleshooting!
+
+Thomas Barnes r.405 thomas.barnes@geo.uio.no
+
+ ~~~~~~~~~~DATA EXTRACTED FROM NEXT PAGE STARTS NOW.~~~~~~~~~~ 
+ 
+Part 1: Jupyter Notebook
+
+Jupyter Notebook is a relatively user friendly and modular approach for working with Python. We will use
+this in the lab covering automated identification of landforms (Lab 7 or 8). It’s relatively easy to learn, and
+is pretty accessible for anyone who has even a basic knowledge of programming languages, especially
+Python. In this session we will make sure we can:
+
+e Launch Jupyter Notebook.
+e Use acustom Jupyter Notebook environment.
+
+Part 2: QGIS
+
+Our primary focus in this session is to work within QGIS to bring everyone up to speed on how to use some
+basic tools in the software. The aim is to have everyone familiar with several key components:
+
+e Creating a Project
+
+o The file system
+
+oO Importing data
+e Delineating features & Symbology
+e Using the toolbox
+
+© Feature conversion
+
+Oo Geometric limitations
+
+o Raster calculation
+
+o Clipping
+e Using QGIS’ custom plugin toolbox
+e Creating a map & good practice
+e Exporting a map as a high-resolution image
+
+2.1 Creating a Project
+
+For this you need to open QGIS which should be installed on your lab computer and select the “New
+project” button. You should choose a sensible place to save the project and add a folder in this directory
+called “data” which you will add to your favourites for easy access. You will then import data and a WMS
+layer, all from GeoNorge.
+
+a. Open QGIS and create a new blank project.
+Set up your file system, and add the project directory as a favourite.
+Set up a new CRS for your project — This can be done by selecting the “EPSG” in the bottom right,
+and selecting for example — EPSG:5556 if you were to be studying Norway.
+
+d. Import the Norge i Bilder Ortofoto WMS from GeoNorge by copying the link, and adding a WMS
+layer.
+
+e. Import a DEM from GeoNorge in the region of Jutulhogget using the DTM 10m UTM 33
+Terrengmodell. This should be the 6802-1 tile as a .tiff.
+
+2.2 Creating some features as shapefiles (Vector Format)
+
+Thomas Barnes r.405 thomas.barnes@geo.uio.no
+
+ ~~~~~~~~~~DATA EXTRACTED FROM NEXT PAGE STARTS NOW.~~~~~~~~~~ 
+ 
+So far, we have imported a web layer (the WMS) and a local raster layer (the DEM). These are both raster
+layers as they are made up of pixels of a fixed size and are displayed as an image. Now we will create some
+shapefiles, these are known as vectors and are the product of point or line features, rather than a series of
+pixels with individual values.
+
+a.
+
+Select the “Create new Shapefile Layer” button and save a new POINT geometry shapefile to your
+data folder. The CRS should be the same as your map.
+
+Do the same for a POLYGON geometry shapefile.
+
+Start editing with your points layer, and find Jutulhogget on the map — you can either compare to
+Google Maps, or use the OpenStreetMap XYZ layer to do so (Similar to the ortofoto WMS, but
+built-in to QGIS).
+
+You can create points by selecting “add point feature” clicking where you want to place a point,
+and then assigning a value on the pop-up.
+
+Save and stop editing your points layer, then start editing your polygon layer in the same manner.
+In the area around Jutulhogget, select something interesting you can see in the ortofoto imagery,
+and try and mark out as many of these items as you can, you could try rivers, scarps, settlements,
+lakes etc. N.B. Right click to finish drawing a polygon.
+
+Once you have selected a sufficient number, Open the symbology of your shapefile layers by right
+clicking on them and selecting “properties” — you can edit how your polygons and points look. Play
+with these tools for a while to create something that looks suitable for the features you have
+identified.
+
+2.3 Testing out the toolbox and changing Raster Symbology
+
+Now we will use some of the most basic QGIS tools, so you learn how the toolbox works. The toolbox is a
+wide and expansive series of different operations, which can be used to manipulate and extract data from
+your feature and raster layers, or connect them to each other and even create data networks!
+
+a.
+
+Firstly, click on the cog icon in the QGIS toolbar, and in the new “Processing Toolbox” pane, search
+for the “Fix Geometries tool”. This tool repairs any problematic geometry in your shapefiles, for
+example overlapping lines in the same feature.
+
+Use your polygons as an input and save the output to a suitable place under a suitable name, you
+will notice little has changed — this is mainly administrative and allows you to work with polygons
+without worrying about geometric conflicts.
+
+Next, we will use the Rasterize (vector to raster) tool, because we want to visualise your polygon
+features as rasters — this can be useful if we want to calculate something based on where your
+polygons are and another raster, as we can assign a value to the polygon pixels.
+
+a. Your input should be your Fixed Geometry features, and we will use a fixed burn in value
+to avoid any complexity right now.
+
+b. Your output size units are georeferenced units, and your resolutions are 10 and 10. Your
+output extent should be your DEM (by selecting calculate from layer in the drop down) —
+this is important to stop the software from creating a raster that is out of scale with the
+rest of your dataset!
+
+Finally, we will use the hillshade tool. Open it and use your DEM as the input, select a reasonable
+Z factor, and azimuth, and save it sensibly!
+
+a. Your z factor is vertical exaggeration for visualisation purposes, 10 is a good rule of thumb.
+
+b. Your Azimuth is the orientation of the sun related to your DEM as a degree value — pick
+something reasonable for Jutulhogget.
+
+Thomas Barnes r.405 thomas.barnes@geo.uio.no
+
+ ~~~~~~~~~~DATA EXTRACTED FROM NEXT PAGE STARTS NOW.~~~~~~~~~~ 
+ 
+As you did with your shapefiles, you can edit the symbology of your rasters too — try this on your
+new raster first, by assigning min to 0 and max to your fixed burn in value. Afterwards, try again
+on your DEM as you can make it look a lot more interesting, for example green — brown white like
+a classical map.
+
+It would be helpful to change your DEM to semi-transparent, and put it on top of your Hillshade in
+the Layers pane transparency is adjusted in the DEM properties page as a slider (transparency).
+This way you can colour your hillshade relative to elevation!
+
+2.4 The QGIS Plugin Manager
+
+This short step will bring you up to date on installing plugins into QGIS. Plugins in QGIS are useful additional
+tools created by third-party users to fulfil specific tasks. These tasks are often hard to perform, or
+impossible to do in regular QGIS due to limitations of the software or existing toolset. The example we are
+going to use is the Profile Tool. This tool allows you to measure values from a raster along a line, so we are
+going to use it to quickly see the cross section of Jutulhogget.
+
+a.
+
+From the Plugins menu, select “Manage and Install Plugins”, and in the dialog which opens, go to
+“All” and search for “Profile Tool”. Click Install Plugin.
+
+A new icon should have appeared on your toolbar, select it and it should open the profile tool
+pane.
+
+Add your DEM as a layer. Then draw a line across the span of Jutulhogget. You should see a chart
+of the elevation. This can be exported as an image, or a .csv dataseries.
+
+2.5 Creating a Map
+
+Creating a map for export in QGIS is quite involved, but is easy once you get the hang of the software.
+When you create a map you need to consider a few important components: north arrows, grids, scale
+bars, titles, legends, appropriate content, degrees of precision.
+
+a.
+
+f.
+
+To open the map creation menu, select the “Create Print Layout” tool next to the Save button on
+the toolbar. To add your map to the export, select the page with the plus next to it. Draw a box for
+your map.
+
+Now, you can use the other tools on the left toolbar to add the required components to your map,
+and the pane on the right (Items & Item properties) to adjust the properties of your new
+components. N.B. Grids are added by selecting the map, and then selecting “Grids”, clicking +
+and then editing the grid in there.
+
+You can edit the legend and the names of all components by selecting it then playing with item
+properties!
+
+Grids are the most problematic component of most map making. As here we are looking at a small
+area, we will use a metre scale, use a reasonable grid scale, remember the default units are in
+metres.
+
+Make sure you draw co-ordinates and they are on your canvas — and they do not need decimals at
+this scale, remove them. It is also good practice to add “N” and “@” to your co-ordinates in the coordinate format drop down.
+
+You can export the map as an image (PNG) or document (PDF) using the buttons on the top toolbar.
+
+3.0 Advanced exercise
+
+Thomas Barnes r.405 thomas.barnes@geo.uio.no
